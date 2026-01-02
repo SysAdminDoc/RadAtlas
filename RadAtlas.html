@@ -1135,10 +1135,12 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-brand">
-        <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png" alt="Maven" class="footer-logo">
+        <a href="https://mavenimaging.com" target="_blank" style="display:contents;">
+          <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png" alt="Maven" class="footer-logo">
+        </a>
         <div>
           <div class="footer-company">Maven Imaging, LLC</div>
-          <div class="footer-tagline">Professional Radiographic Solutions</div>
+          <a href="https://mavenimaging.com" target="_blank" class="footer-tagline" style="text-decoration:none;color:var(--text-muted);">mavenimaging.com</a>
         </div>
       </div>
       <div class="footer-center">
@@ -1179,6 +1181,13 @@
     // LemonSqueezy API endpoint for license validation
     const LEMON_VALIDATE_URL = 'https://api.lemonsqueezy.com/v1/licenses/validate';
     
+    // Internal master keys (for testing & promotional use)
+    const INTERNAL_KEYS = [
+      'MAVEN-2026-INTERNAL-RADATLAS-PRO',
+      'RADATLAS-ADMIN-7X9K2M4P',
+      'MVN-PROMO-2026-XRAY-TECH'
+    ];
+    
     let licenseData = null;
     
     // Check license status on page load
@@ -1188,6 +1197,12 @@
       if (stored) {
         try {
           licenseData = JSON.parse(stored);
+          
+          // Check if it's an internal key (always valid)
+          if (INTERNAL_KEYS.includes(licenseData.key)) {
+            showApp();
+            return;
+          }
           
           // Re-validate with LemonSqueezy (in case subscription expired)
           const isValid = await validateLicenseKey(licenseData.key, false);
@@ -1213,6 +1228,24 @@
     async function validateLicenseKey(key, showErrors = true) {
       const errorEl = document.getElementById('licenseError');
       const btnEl = document.getElementById('licenseBtn');
+      
+      // Check for internal/master keys first (bypass API)
+      if (INTERNAL_KEYS.includes(key.toUpperCase().trim())) {
+        licenseData = {
+          key: key.toUpperCase().trim(),
+          status: 'active',
+          customerEmail: 'internal@mavenimaging.com',
+          customerName: 'Maven Imaging Internal',
+          productName: 'RadAtlas Pro (Internal License)',
+          validatedAt: new Date().toISOString(),
+          expiresAt: null // Never expires
+        };
+        localStorage.setItem(LICENSE_STORAGE_KEY, JSON.stringify(licenseData));
+        if (showErrors) {
+          showApp();
+        }
+        return true;
+      }
       
       try {
         btnEl.disabled = true;
