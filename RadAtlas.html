@@ -3,15 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RadAtlas - X-Ray Technique Reference</title>
+  <meta name="description" content="RadAtlas - Professional X-Ray Technique Reference by Maven Imaging">
+  <meta name="author" content="Maven Imaging, LLC">
+  <meta name="theme-color" content="#1e3a5f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RadAtlas">
+  <title>RadAtlas - X-Ray Technique Reference | Maven Imaging</title>
   <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/MavenLogo.ico">
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png">
   <style>
+    :root {
+      --maven-navy: #1e3a5f;
+      --maven-blue: #5ba4e6;
+      --maven-light-blue: #7bb8eb;
+      --maven-dark: #0a0f1a;
+      --maven-darker: #060a12;
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-color: #1e293b;
+      --card-bg: #1e293b;
+      --card-hover: #283548;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0a0f1a;
-      color: #e2e8f0;
+      background: var(--maven-dark);
+      color: var(--text-primary);
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
@@ -22,33 +42,311 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 600px;
-      height: 600px;
+      width: 700px;
+      height: 700px;
       background: url('https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/MavenLogo.png') no-repeat center center;
       background-size: contain;
-      opacity: 0.06;
+      opacity: 0.08;
       pointer-events: none;
       z-index: 0;
     }
+
+    /* LICENSE GATE SCREEN */
+    .license-gate {
+      position: fixed;
+      inset: 0;
+      background: var(--maven-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+    .license-gate.hidden {
+      display: none;
+    }
+    .license-box {
+      background: var(--card-bg);
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 48px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+    }
+    .license-logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 24px;
+    }
+    .license-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--maven-blue);
+      margin-bottom: 8px;
+    }
+    .license-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .license-form {
+      text-align: left;
+    }
+    .license-form label {
+      display: block;
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .license-form input {
+      width: 100%;
+      padding: 14px 16px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 15px;
+      margin-bottom: 16px;
+    }
+    .license-form input:focus {
+      outline: none;
+      border-color: var(--maven-blue);
+    }
+    .license-form input::placeholder {
+      color: var(--text-muted);
+    }
+    .license-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--maven-blue);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 16px;
+    }
+    .license-btn:hover {
+      background: var(--maven-light-blue);
+    }
+    .license-btn:disabled {
+      background: #475569;
+      cursor: not-allowed;
+    }
+    .license-error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 13px;
+      color: #ef4444;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .license-error.show {
+      display: block;
+    }
+    .license-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 24px 0;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    .license-divider::before,
+    .license-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #334155;
+    }
+    .license-get-trial {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      text-align: center;
+    }
+    .license-get-trial:hover {
+      background: #1e293b;
+      border-color: #475569;
+      color: var(--text-primary);
+    }
+    .license-footer {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid #334155;
+    }
+    .license-footer img {
+      width: 100px;
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+    .license-footer p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* TRIAL BANNER */
+    .trial-banner {
+      background: linear-gradient(90deg, rgba(245,158,11,0.15) 0%, rgba(245,158,11,0.05) 100%);
+      border-bottom: 1px solid rgba(245,158,11,0.3);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 13px;
+    }
+    .trial-banner.hidden {
+      display: none;
+    }
+    .trial-banner .trial-text {
+      color: #f59e0b;
+    }
+    .trial-banner .trial-days {
+      font-weight: 600;
+    }
+    .trial-banner .trial-upgrade {
+      padding: 6px 12px;
+      background: #f59e0b;
+      border: none;
+      border-radius: 6px;
+      color: #0f172a;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .trial-banner .trial-upgrade:hover {
+      background: #fbbf24;
+    }
+
+    /* SPLASH SCREEN */
+    .splash-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--maven-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    .splash-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .splash-logo {
+      width: 120px;
+      height: 120px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    .splash-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--maven-blue);
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 0.3s forwards;
+    }
+    .splash-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 0.5s forwards;
+    }
+    .splash-company {
+      position: absolute;
+      bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-out 0.7s forwards;
+    }
+    .splash-company img {
+      width: 28px;
+      height: 28px;
+    }
+    .splash-company span {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HEADER */
     .header {
       position: sticky;
       top: 0;
       z-index: 100;
       background: rgba(10, 15, 26, 0.98);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid #1e293b;
-      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
       display: flex;
       align-items: center;
       gap: 12px;
     }
-    .logo {
-      width: 40px; height: 40px;
-      display: flex; align-items: center; justify-content: center;
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
     }
-    .logo img { width: 36px; height: 36px; }
-    .title { font-size: 18px; font-weight: 700; color: #5ba4e6; }
-    .subtitle { font-size: 11px; color: #64748b; }
+    .header-brand:hover {
+      background: rgba(91, 164, 230, 0.1);
+    }
+    .header-logo {
+      width: 44px;
+      height: 44px;
+    }
+    .header-titles {
+      display: flex;
+      flex-direction: column;
+    }
+    .header-main-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--maven-blue);
+      line-height: 1.2;
+    }
+    .header-tagline {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header-tagline .maven-text {
+      color: var(--maven-light-blue);
+      font-weight: 500;
+    }
     .nav-tabs {
       display: flex;
       margin-left: auto;
@@ -59,7 +357,7 @@
       background: transparent;
       border: none;
       border-radius: 8px;
-      color: #64748b;
+      color: var(--text-muted);
       font-size: 13px;
       cursor: pointer;
       transition: all 0.2s;
@@ -67,8 +365,8 @@
       align-items: center;
       gap: 6px;
     }
-    .nav-tab:hover { background: #1e293b; color: #94a3b8; }
-    .nav-tab.active { background: #3b82f6; color: white; }
+    .nav-tab:hover { background: var(--card-bg); color: var(--text-secondary); }
+    .nav-tab.active { background: var(--maven-navy); color: white; }
     .nav-tab svg { width: 16px; height: 16px; }
 
     /* MAIN LAYOUT */
@@ -83,30 +381,30 @@
     .anatomy-panel {
       width: 380px;
       min-width: 380px;
-      background: linear-gradient(180deg, #0f172a 0%, #0a0f1a 100%);
-      border-right: 1px solid #1e293b;
+      background: linear-gradient(180deg, #0f172a 0%, var(--maven-dark) 100%);
+      border-right: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
       position: relative;
     }
     .anatomy-header {
       padding: 16px;
-      border-bottom: 1px solid #1e293b;
+      border-bottom: 1px solid var(--border-color);
     }
     .anatomy-title {
       font-size: 14px;
       font-weight: 600;
-      color: #94a3b8;
+      color: var(--text-secondary);
       margin-bottom: 4px;
     }
     .anatomy-hint {
       font-size: 12px;
-      color: #64748b;
+      color: var(--text-muted);
     }
     .selected-region-badge {
       display: inline-block;
       padding: 4px 10px;
-      background: #3b82f6;
+      background: var(--maven-navy);
       border-radius: 12px;
       font-size: 11px;
       color: white;
@@ -129,7 +427,7 @@
     .anatomy-figure img {
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 0 40px rgba(59, 130, 246, 0.15));
+      filter: drop-shadow(0 0 40px rgba(91, 164, 230, 0.15));
     }
     
     /* CLICKABLE HOTSPOTS */
@@ -141,13 +439,13 @@
       border: 2px solid transparent;
     }
     .hotspot:hover {
-      background: rgba(59, 130, 246, 0.25);
-      border-color: rgba(59, 130, 246, 0.5);
+      background: rgba(91, 164, 230, 0.25);
+      border-color: rgba(91, 164, 230, 0.5);
     }
     .hotspot.active {
-      background: rgba(59, 130, 246, 0.35);
-      border-color: #3b82f6;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+      background: rgba(91, 164, 230, 0.35);
+      border-color: var(--maven-blue);
+      box-shadow: 0 0 12px rgba(91, 164, 230, 0.4);
     }
     .hotspot-label {
       position: absolute;
@@ -175,7 +473,7 @@
     }
     .controls {
       padding: 16px;
-      border-bottom: 1px solid #1e293b;
+      border-bottom: 1px solid var(--border-color);
       background: rgba(15, 23, 42, 0.5);
     }
     .search-row {
@@ -186,14 +484,14 @@
     .search-box {
       flex: 1;
       padding: 12px 16px;
-      background: #1e293b;
+      background: var(--card-bg);
       border: 1px solid #334155;
       border-radius: 10px;
-      color: #e2e8f0;
+      color: var(--text-primary);
       font-size: 14px;
     }
-    .search-box:focus { outline: none; border-color: #3b82f6; }
-    .search-box::placeholder { color: #64748b; }
+    .search-box:focus { outline: none; border-color: var(--maven-blue); }
+    .search-box::placeholder { color: var(--text-muted); }
     .add-btn {
       padding: 12px 20px;
       background: #22c55e;
@@ -213,30 +511,30 @@
     .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
     .filter-btn {
       padding: 6px 14px;
-      background: #1e293b;
+      background: var(--card-bg);
       border: none;
       border-radius: 20px;
-      color: #94a3b8;
+      color: var(--text-secondary);
       font-size: 12px;
       cursor: pointer;
       transition: all 0.2s;
     }
     .filter-btn:hover { background: #334155; }
-    .filter-btn.active { background: #3b82f6; color: white; }
+    .filter-btn.active { background: var(--maven-navy); color: white; }
     .size-btn {
       padding: 6px 12px;
-      background: #1e293b;
+      background: var(--card-bg);
       border: 1px solid transparent;
       border-radius: 8px;
-      color: #94a3b8;
+      color: var(--text-secondary);
       font-size: 12px;
       cursor: pointer;
       transition: all 0.2s;
     }
     .size-btn.active {
-      background: rgba(59, 130, 246, 0.2);
-      border-color: rgba(59, 130, 246, 0.4);
-      color: #60a5fa;
+      background: rgba(91, 164, 230, 0.2);
+      border-color: rgba(91, 164, 230, 0.4);
+      color: var(--maven-blue);
     }
     .stats-row {
       display: flex;
@@ -244,18 +542,18 @@
       align-items: center;
       margin-top: 8px;
     }
-    .stats { font-size: 12px; color: #64748b; }
+    .stats { font-size: 12px; color: var(--text-muted); }
     .reset-btn {
       padding: 4px 10px;
       background: transparent;
       border: 1px solid #475569;
       border-radius: 6px;
-      color: #94a3b8;
+      color: var(--text-secondary);
       font-size: 11px;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .reset-btn:hover { background: #334155; border-color: #64748b; }
+    .reset-btn:hover { background: #334155; border-color: var(--text-muted); }
     
     .grid-container {
       flex: 1;
@@ -268,7 +566,7 @@
       gap: 12px;
     }
     .card {
-      background: #1e293b;
+      background: var(--card-bg);
       border: 1px solid #334155;
       border-radius: 12px;
       padding: 16px;
@@ -276,7 +574,7 @@
       transition: all 0.2s;
       position: relative;
     }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); background: var(--card-hover); }
     .card.favorited { border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.05); }
     .card.custom { border-color: rgba(34, 197, 94, 0.4); }
     .card-actions {
@@ -295,18 +593,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #64748b;
+      color: var(--text-muted);
       transition: all 0.2s;
     }
-    .card-btn:hover { color: #94a3b8; background: #1e293b; }
+    .card-btn:hover { color: var(--text-secondary); background: var(--card-bg); }
     .card-btn.fav-btn:hover { color: #f59e0b; }
     .card-btn.fav-btn.active { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
-    .card-btn.edit-btn:hover { color: #3b82f6; }
+    .card-btn.edit-btn:hover { color: var(--maven-blue); }
     .card-btn.delete-btn:hover { color: #ef4444; }
     .card-btn svg { width: 16px; height: 16px; }
     .card-region { font-size: 10px; color: #06b6d4; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
     .card-body { font-size: 16px; font-weight: 700; margin: 4px 0 2px; }
-    .card-view { font-size: 14px; color: #94a3b8; }
+    .card-view { font-size: 14px; color: var(--text-secondary); }
     .card-values { display: flex; gap: 8px; margin: 12px 0; }
     .value-box {
       flex: 1;
@@ -315,9 +613,9 @@
       padding: 8px;
       text-align: center;
     }
-    .value-label { font-size: 10px; color: #64748b; text-transform: uppercase; }
-    .value-num { font-size: 20px; font-weight: 700; color: #60a5fa; font-family: monospace; }
-    .card-meta { display: flex; gap: 16px; font-size: 11px; color: #64748b; }
+    .value-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+    .value-num { font-size: 20px; font-weight: 700; color: var(--maven-blue); font-family: monospace; }
+    .card-meta { display: flex; gap: 16px; font-size: 11px; color: var(--text-muted); }
     .card-meta .grid-yes { color: #22c55e; }
     .custom-badge {
       display: inline-block;
@@ -348,7 +646,7 @@
     }
     .modal-overlay.open { opacity: 1; visibility: visible; }
     .modal {
-      background: #1e293b;
+      background: var(--card-bg);
       border: 1px solid #334155;
       border-radius: 16px;
       max-width: 500px;
@@ -368,16 +666,16 @@
       border: none;
       width: 32px; height: 32px;
       border-radius: 8px;
-      color: #64748b;
+      color: var(--text-muted);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .modal-close:hover { color: #e2e8f0; }
+    .modal-close:hover { color: var(--text-primary); }
     .modal-region { font-size: 12px; color: #06b6d4; text-transform: uppercase; font-weight: 600; }
     .modal-title { font-size: 24px; font-weight: 700; margin: 4px 0; }
-    .modal-view { font-size: 18px; color: #94a3b8; }
+    .modal-view { font-size: 18px; color: var(--text-secondary); }
     .modal-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
     .modal-value {
       background: #0f172a;
@@ -385,10 +683,10 @@
       padding: 16px;
       text-align: center;
     }
-    .modal-value-label { font-size: 11px; color: #64748b; text-transform: uppercase; margin-bottom: 4px; }
-    .modal-value-num { font-size: 28px; font-weight: 700; color: #60a5fa; font-family: monospace; }
+    .modal-value-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+    .modal-value-num { font-size: 28px; font-weight: 700; color: var(--maven-blue); font-family: monospace; }
     .modal-section { margin-top: 20px; }
-    .modal-section-title { font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 8px; }
+    .modal-section-title { font-size: 12px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
     .modal-note { background: #0f172a; padding: 12px; border-radius: 8px; font-size: 14px; }
     .modal-sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .modal-size-box {
@@ -397,9 +695,9 @@
       border-radius: 8px;
       text-align: center;
     }
-    .modal-size-label { font-size: 11px; color: #64748b; text-transform: uppercase; }
-    .modal-size-value { font-size: 18px; font-weight: 700; color: #94a3b8; margin-top: 4px; }
-    .modal-size-box.active .modal-size-value { color: #60a5fa; }
+    .modal-size-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
+    .modal-size-value { font-size: 18px; font-weight: 700; color: var(--text-secondary); margin-top: 4px; }
+    .modal-size-box.active .modal-size-value { color: var(--maven-blue); }
     .modal-actions {
       display: flex;
       gap: 8px;
@@ -417,17 +715,103 @@
       transition: all 0.2s;
     }
     .btn-edit {
-      background: #3b82f6;
+      background: var(--maven-navy);
       border: none;
       color: white;
     }
-    .btn-edit:hover { background: #2563eb; }
+    .btn-edit:hover { background: #2a4a70; }
     .btn-delete {
       background: transparent;
       border: 1px solid #ef4444;
       color: #ef4444;
     }
     .btn-delete:hover { background: rgba(239, 68, 68, 0.1); }
+    
+    /* ABOUT MODAL */
+    .about-modal {
+      max-width: 420px;
+      text-align: center;
+    }
+    .about-logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+    }
+    .about-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--maven-blue);
+      margin-bottom: 4px;
+    }
+    .about-version {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .about-divider {
+      height: 1px;
+      background: #334155;
+      margin: 20px 0;
+    }
+    .about-company-logo {
+      width: 160px;
+      margin: 0 auto 12px;
+    }
+    .about-company-name {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+    .about-website {
+      font-size: 13px;
+      color: var(--maven-blue);
+      text-decoration: none;
+    }
+    .about-website:hover {
+      text-decoration: underline;
+    }
+    .about-description {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 16px 0;
+      line-height: 1.5;
+    }
+    .about-license {
+      background: #0f172a;
+      border-radius: 8px;
+      padding: 12px;
+      margin: 16px 0;
+      font-size: 12px;
+    }
+    .about-license-label {
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .about-license-status {
+      color: #22c55e;
+      font-weight: 600;
+    }
+    .about-license-status.trial {
+      color: #f59e0b;
+    }
+    .about-copyright {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 20px;
+    }
+    .about-logout {
+      margin-top: 16px;
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .about-logout:hover {
+      background: #1e293b;
+    }
     
     /* EDIT MODAL */
     .edit-modal {
@@ -436,7 +820,7 @@
     .edit-modal h2 {
       font-size: 20px;
       margin-bottom: 20px;
-      color: #e2e8f0;
+      color: var(--text-primary);
     }
     .form-row {
       display: grid;
@@ -457,7 +841,7 @@
     }
     .form-group label {
       font-size: 12px;
-      color: #94a3b8;
+      color: var(--text-secondary);
       font-weight: 500;
     }
     .form-group label span {
@@ -470,14 +854,14 @@
       background: #0f172a;
       border: 1px solid #334155;
       border-radius: 8px;
-      color: #e2e8f0;
+      color: var(--text-primary);
       font-size: 14px;
     }
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
       outline: none;
-      border-color: #3b82f6;
+      border-color: var(--maven-blue);
     }
     .form-group select {
       cursor: pointer;
@@ -496,10 +880,10 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       padding: 10px 12px;
-      background: #1e293b;
+      background: var(--card-bg);
       font-size: 11px;
       text-transform: uppercase;
-      color: #64748b;
+      color: var(--text-muted);
       font-weight: 600;
     }
     .mas-table-row {
@@ -507,23 +891,23 @@
       grid-template-columns: 1fr 1fr;
       padding: 8px 12px;
       align-items: center;
-      border-top: 1px solid #1e293b;
+      border-top: 1px solid var(--card-bg);
     }
     .mas-table-row span {
       font-size: 14px;
     }
     .mas-table-row input {
       padding: 8px;
-      background: #1e293b;
+      background: var(--card-bg);
       border: 1px solid #334155;
       border-radius: 6px;
-      color: #e2e8f0;
+      color: var(--text-primary);
       font-size: 14px;
       text-align: center;
     }
     .mas-table-row input:focus {
       outline: none;
-      border-color: #3b82f6;
+      border-color: var(--maven-blue);
     }
     .form-actions {
       display: flex;
@@ -543,23 +927,66 @@
     .btn-cancel {
       background: transparent;
       border: 1px solid #475569;
-      color: #94a3b8;
+      color: var(--text-secondary);
     }
     .btn-cancel:hover { background: #334155; }
     .btn-save {
-      background: #3b82f6;
+      background: var(--maven-navy);
       border: none;
       color: white;
       margin-left: auto;
     }
-    .btn-save:hover { background: #2563eb; }
+    .btn-save:hover { background: #2a4a70; }
     
+    /* FOOTER */
     .footer {
-      text-align: center;
-      padding: 16px;
+      background: var(--maven-darker);
+      border-top: 1px solid var(--border-color);
+      padding: 20px;
+    }
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-logo {
+      width: 32px;
+      height: 32px;
+    }
+    .footer-company {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .footer-tagline {
       font-size: 11px;
-      color: #475569;
-      border-top: 1px solid #1e293b;
+      color: var(--text-muted);
+    }
+    .footer-center {
+      text-align: center;
+    }
+    .footer-disclaimer {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .footer-version {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .footer-right {
+      text-align: right;
+    }
+    .footer-copyright {
+      font-size: 11px;
+      color: var(--text-muted);
     }
     
     /* MOBILE RESPONSIVE */
@@ -570,33 +997,85 @@
         min-width: 100%;
         max-height: 50vh;
         border-right: none;
-        border-bottom: 1px solid #1e293b;
+        border-bottom: 1px solid var(--border-color);
       }
       .anatomy-container { padding: 10px; }
       .anatomy-figure { max-width: 200px; }
       .nav-tab span { display: none; }
       .form-row { grid-template-columns: 1fr; }
       .form-row.two-col { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-right { text-align: center; }
+      .header-tagline { display: none; }
+      .trial-banner { flex-wrap: wrap; text-align: center; }
     }
     
     /* EMPTY STATE */
     .empty-state {
       text-align: center;
       padding: 60px 20px;
-      color: #64748b;
+      color: var(--text-muted);
     }
     .empty-state svg { width: 64px; height: 64px; opacity: 0.5; margin-bottom: 16px; }
-    .empty-state h3 { font-size: 18px; color: #94a3b8; margin-bottom: 8px; }
+    .empty-state h3 { font-size: 18px; color: var(--text-secondary); margin-bottom: 8px; }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png" alt="Maven" style="width:32px;height:32px;">
+  <!-- LICENSE GATE -->
+  <div class="license-gate" id="licenseGate">
+    <div class="license-box">
+      <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png" alt="RadAtlas" class="license-logo">
+      <div class="license-title">RadAtlas</div>
+      <div class="license-subtitle">Enter your license key to continue</div>
+      
+      <div class="license-error" id="licenseError"></div>
+      
+      <form class="license-form" id="licenseForm">
+        <label for="licenseKey">License Key</label>
+        <input type="text" id="licenseKey" name="licenseKey" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" required>
+        <button type="submit" class="license-btn" id="licenseBtn">Activate License</button>
+      </form>
+      
+      <div class="license-divider">or</div>
+      
+      <!-- IMPORTANT: Replace https://mavenimaging.lemonsqueezy.com/checkout/buy/1c8b67f2-2ad4-4a57-ae1a-0f9c4c8e3818 with your LemonSqueezy checkout link -->
+      <a href="https://mavenimaging.lemonsqueezy.com/checkout/buy/1c8b67f2-2ad4-4a57-ae1a-0f9c4c8e3818" class="license-get-trial" target="_blank">Start Free 30-Day Trial →</a>
+      
+      <div class="license-footer">
+        <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/MavenLogo.png" alt="Maven Imaging">
+        <p>© 2026 Maven Imaging, LLC</p>
+      </div>
     </div>
-    <div>
-      <div class="title">RadAtlas</div>
-      <div class="subtitle">X-Ray Technique Reference</div>
+  </div>
+
+  <!-- TRIAL BANNER -->
+  <div class="trial-banner hidden" id="trialBanner">
+    <span class="trial-text">🎉 Free Trial: <span class="trial-days" id="trialDays">30 days</span> remaining</span>
+    <!-- IMPORTANT: Replace https://mavenimaging.lemonsqueezy.com/checkout/buy/1c8b67f2-2ad4-4a57-ae1a-0f9c4c8e3818 with your LemonSqueezy checkout link -->
+    <a href="https://mavenimaging.lemonsqueezy.com/checkout/buy/1c8b67f2-2ad4-4a57-ae1a-0f9c4c8e3818" class="trial-upgrade" target="_blank">Upgrade Now</a>
+  </div>
+
+  <!-- SPLASH SCREEN -->
+  <div class="splash-screen hidden" id="splashScreen">
+    <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png" alt="Maven" class="splash-logo">
+    <div class="splash-title">RadAtlas</div>
+    <div class="splash-subtitle">X-Ray Technique Reference</div>
+    <div class="splash-company">
+      <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png" alt="Maven">
+      <span>Powered by Maven Imaging</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-brand" onclick="openAboutModal()" title="About RadAtlas">
+      <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png" alt="Maven Imaging" class="header-logo">
+      <div class="header-titles">
+        <div class="header-main-title">RadAtlas</div>
+        <div class="header-tagline">
+          X-Ray Technique Reference • <span class="maven-text">A Maven Imaging Product</span>
+        </div>
+      </div>
     </div>
     <div class="nav-tabs">
       <button class="nav-tab active" id="tabAnatomy" onclick="switchView('anatomy')">
@@ -614,6 +1093,7 @@
     </div>
   </header>
 
+  <!-- MAIN CONTAINER -->
   <div class="main-container">
     <aside class="anatomy-panel" id="anatomyPanel">
       <div class="anatomy-header">
@@ -622,9 +1102,7 @@
         <div class="selected-region-badge" id="selectedBadge" style="display:none;"></div>
       </div>
       <div class="anatomy-container">
-        <div class="anatomy-figure" id="anatomyFigure">
-          <!-- Image will be inserted here -->
-        </div>
+        <div class="anatomy-figure" id="anatomyFigure"></div>
       </div>
     </aside>
 
@@ -639,7 +1117,7 @@
         </div>
         <div class="filter-row" id="regionFilters"></div>
         <div class="filter-row">
-          <span style="font-size:12px;color:#64748b;margin-right:8px;">Patient Size:</span>
+          <span style="font-size:12px;color:var(--text-muted);margin-right:8px;">Patient Size:</span>
           <div id="sizeFilters"></div>
         </div>
         <div class="stats-row">
@@ -650,21 +1128,230 @@
       <div class="grid-container">
         <div class="grid" id="grid"></div>
       </div>
-      <footer class="footer">Always verify with facility protocols • © 2026 Maven Imaging, LLC. All rights reserved.</footer>
     </main>
   </div>
 
-  <!-- View Modal -->
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png" alt="Maven" class="footer-logo">
+        <div>
+          <div class="footer-company">Maven Imaging, LLC</div>
+          <div class="footer-tagline">Professional Radiographic Solutions</div>
+        </div>
+      </div>
+      <div class="footer-center">
+        <div class="footer-disclaimer">Always verify techniques with facility protocols</div>
+        <div class="footer-version">RadAtlas v1.0.0</div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-copyright">© 2026 Maven Imaging, LLC</div>
+        <div class="footer-copyright">All rights reserved</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- VIEW MODAL -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal" id="modal"></div>
   </div>
 
-  <!-- Edit Modal -->
+  <!-- EDIT MODAL -->
   <div class="modal-overlay" id="editModalOverlay">
     <div class="modal edit-modal" id="editModal"></div>
   </div>
 
+  <!-- ABOUT MODAL -->
+  <div class="modal-overlay" id="aboutModalOverlay">
+    <div class="modal about-modal" id="aboutModal"></div>
+  </div>
+
   <script>
+    // ============================================
+    // LICENSE MANAGEMENT
+    // ============================================
+    
+    const LICENSE_STORAGE_KEY = 'radatlas-license';
+    const TRIAL_STORAGE_KEY = 'radatlas-trial-start';
+    const TRIAL_DAYS = 30;
+    
+    // LemonSqueezy API endpoint for license validation
+    const LEMON_VALIDATE_URL = 'https://api.lemonsqueezy.com/v1/licenses/validate';
+    
+    let licenseData = null;
+    
+    // Check license status on page load
+    async function checkLicense() {
+      const stored = localStorage.getItem(LICENSE_STORAGE_KEY);
+      
+      if (stored) {
+        try {
+          licenseData = JSON.parse(stored);
+          
+          // Re-validate with LemonSqueezy (in case subscription expired)
+          const isValid = await validateLicenseKey(licenseData.key, false);
+          
+          if (isValid) {
+            showApp();
+            return;
+          } else {
+            // License no longer valid, clear it
+            localStorage.removeItem(LICENSE_STORAGE_KEY);
+            licenseData = null;
+          }
+        } catch (e) {
+          console.error('License check error:', e);
+        }
+      }
+      
+      // No valid license, show gate
+      showLicenseGate();
+    }
+    
+    // Validate license key with LemonSqueezy
+    async function validateLicenseKey(key, showErrors = true) {
+      const errorEl = document.getElementById('licenseError');
+      const btnEl = document.getElementById('licenseBtn');
+      
+      try {
+        btnEl.disabled = true;
+        btnEl.textContent = 'Validating...';
+        
+        const response = await fetch(LEMON_VALIDATE_URL, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            license_key: key,
+            instance_name: 'RadAtlas Web App'
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (data.valid || data.license_key?.status === 'active') {
+          // License is valid!
+          licenseData = {
+            key: key,
+            status: data.license_key?.status || 'active',
+            customerEmail: data.meta?.customer_email || '',
+            customerName: data.meta?.customer_name || '',
+            productName: data.meta?.product_name || 'RadAtlas Pro',
+            validatedAt: new Date().toISOString(),
+            expiresAt: data.license_key?.expires_at || null
+          };
+          
+          localStorage.setItem(LICENSE_STORAGE_KEY, JSON.stringify(licenseData));
+          
+          if (showErrors) {
+            showApp();
+          }
+          return true;
+        } else {
+          // Invalid license
+          if (showErrors) {
+            errorEl.textContent = data.error || 'Invalid or expired license key. Please check and try again.';
+            errorEl.classList.add('show');
+          }
+          return false;
+        }
+      } catch (error) {
+        console.error('Validation error:', error);
+        
+        // If we can't reach the API, allow cached valid licenses
+        if (licenseData && !showErrors) {
+          return true; // Offline grace period
+        }
+        
+        if (showErrors) {
+          errorEl.textContent = 'Unable to validate license. Please check your internet connection.';
+          errorEl.classList.add('show');
+        }
+        return false;
+      } finally {
+        btnEl.disabled = false;
+        btnEl.textContent = 'Activate License';
+      }
+    }
+    
+    // Handle license form submission
+    document.getElementById('licenseForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const key = document.getElementById('licenseKey').value.trim();
+      document.getElementById('licenseError').classList.remove('show');
+      
+      if (key) {
+        await validateLicenseKey(key, true);
+      }
+    });
+    
+    // Show license gate
+    function showLicenseGate() {
+      document.getElementById('licenseGate').classList.remove('hidden');
+      document.querySelector('.header').style.display = 'none';
+      document.querySelector('.main-container').style.display = 'none';
+      document.querySelector('.footer').style.display = 'none';
+      document.getElementById('trialBanner').classList.add('hidden');
+    }
+    
+    // Show main app
+    function showApp() {
+      document.getElementById('licenseGate').classList.add('hidden');
+      document.querySelector('.header').style.display = 'flex';
+      document.querySelector('.main-container').style.display = 'flex';
+      document.querySelector('.footer').style.display = 'block';
+      
+      // Show splash screen briefly
+      const splash = document.getElementById('splashScreen');
+      splash.classList.remove('hidden');
+      setTimeout(() => {
+        splash.classList.add('hidden');
+      }, 1500);
+      
+      // Check if trial and show banner
+      updateTrialBanner();
+      
+      // Initialize app
+      initApp();
+    }
+    
+    // Update trial banner
+    function updateTrialBanner() {
+      if (!licenseData) return;
+      
+      // Check if this is a trial (you can customize this based on LemonSqueezy product variant)
+      const isTrial = licenseData.status === 'inactive' || 
+                      licenseData.productName?.toLowerCase().includes('trial') ||
+                      (licenseData.expiresAt && new Date(licenseData.expiresAt) > new Date());
+      
+      if (isTrial && licenseData.expiresAt) {
+        const expiresAt = new Date(licenseData.expiresAt);
+        const now = new Date();
+        const daysLeft = Math.ceil((expiresAt - now) / (1000 * 60 * 60 * 24));
+        
+        if (daysLeft > 0 && daysLeft <= TRIAL_DAYS) {
+          document.getElementById('trialDays').textContent = `${daysLeft} day${daysLeft !== 1 ? 's' : ''}`;
+          document.getElementById('trialBanner').classList.remove('hidden');
+        }
+      }
+    }
+    
+    // Logout / Clear license
+    function logout() {
+      if (confirm('Sign out and clear your license key?')) {
+        localStorage.removeItem(LICENSE_STORAGE_KEY);
+        licenseData = null;
+        location.reload();
+      }
+    }
+    
+    // ============================================
+    // MAIN APP CODE
+    // ============================================
+    
     // DEFAULT TECHNIQUE DATA (85 protocols)
     const defaultTechniques = [
       { id: 1, region: 'Head/Neck', bodyPart: 'Skull', view: 'AP', kVp: 68, mA: 200, grid: true, sid: 100, sidInches: 40, sizes: { small: 20, average: 25, large: 30 }, notes: 'Standard skull radiography' },
@@ -799,12 +1486,35 @@
     let favorites = [];
     let editingId = null;
 
-    // Load data from localStorage or use defaults
+    // DOM ELEMENTS
+    let anatomyFigure, anatomyPanel, selectedBadge, searchBox, regionFilters, sizeFilters, stats, grid, modalOverlay, modal, editModalOverlay, editModal;
+
+    function initApp() {
+      anatomyFigure = document.getElementById('anatomyFigure');
+      anatomyPanel = document.getElementById('anatomyPanel');
+      selectedBadge = document.getElementById('selectedBadge');
+      searchBox = document.getElementById('searchBox');
+      regionFilters = document.getElementById('regionFilters');
+      sizeFilters = document.getElementById('sizeFilters');
+      stats = document.getElementById('stats');
+      grid = document.getElementById('grid');
+      modalOverlay = document.getElementById('modalOverlay');
+      modal = document.getElementById('modal');
+      editModalOverlay = document.getElementById('editModalOverlay');
+      editModal = document.getElementById('editModal');
+
+      loadData();
+      initAnatomy();
+      renderFilters();
+      renderGrid();
+      setupEventListeners();
+    }
+
     function loadData() {
       try {
-        const saved = localStorage.getItem('radtech-techniques');
+        const saved = localStorage.getItem('radatlas-techniques');
         techniques = saved ? JSON.parse(saved) : JSON.parse(JSON.stringify(defaultTechniques));
-        favorites = JSON.parse(localStorage.getItem('radtech-favs') || '[]');
+        favorites = JSON.parse(localStorage.getItem('radatlas-favs') || '[]');
       } catch(e) {
         techniques = JSON.parse(JSON.stringify(defaultTechniques));
         favorites = [];
@@ -813,8 +1523,8 @@
 
     function saveData() {
       try {
-        localStorage.setItem('radtech-techniques', JSON.stringify(techniques));
-        localStorage.setItem('radtech-favs', JSON.stringify(favorites));
+        localStorage.setItem('radatlas-techniques', JSON.stringify(techniques));
+        localStorage.setItem('radatlas-favs', JSON.stringify(favorites));
       } catch(e) {}
     }
 
@@ -826,21 +1536,6 @@
       }
     }
 
-    // DOM ELEMENTS
-    const anatomyFigure = document.getElementById('anatomyFigure');
-    const anatomyPanel = document.getElementById('anatomyPanel');
-    const selectedBadge = document.getElementById('selectedBadge');
-    const searchBox = document.getElementById('searchBox');
-    const regionFilters = document.getElementById('regionFilters');
-    const sizeFilters = document.getElementById('sizeFilters');
-    const stats = document.getElementById('stats');
-    const grid = document.getElementById('grid');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modal = document.getElementById('modal');
-    const editModalOverlay = document.getElementById('editModalOverlay');
-    const editModal = document.getElementById('editModal');
-
-    // INITIALIZE ANATOMY
     function initAnatomy() {
       const img = document.createElement('img');
       img.src = 'https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/Human.png';
@@ -1003,9 +1698,9 @@
           <button class="modal-close" onclick="closeModal()">✕</button>
         </div>
         <div class="modal-values">
-          <div class="modal-value"><div class="modal-value-label">kVp</div><div class="value-num">${t.kVp}</div></div>
-          <div class="modal-value" style="background:rgba(59,130,246,0.15);"><div class="modal-value-label">mAs (${currentSize})</div><div class="value-num" style="color:#60a5fa;">${t.sizes[currentSize]}</div></div>
-          <div class="modal-value"><div class="modal-value-label">SID</div><div class="value-num">${t.sidInches}"</div></div>
+          <div class="modal-value"><div class="modal-value-label">kVp</div><div class="modal-value-num">${t.kVp}</div></div>
+          <div class="modal-value" style="background:rgba(91,164,230,0.15);"><div class="modal-value-label">mAs (${currentSize})</div><div class="modal-value-num" style="color:var(--maven-blue);">${t.sizes[currentSize]}</div></div>
+          <div class="modal-value"><div class="modal-value-label">SID</div><div class="modal-value-num">${t.sidInches}"</div></div>
         </div>
         <div class="modal-section">
           <div class="modal-section-title">Patient Size Adjustments</div>
@@ -1015,7 +1710,7 @@
         </div>
         <div class="modal-section">
           <div class="modal-section-title">Grid</div>
-          <div class="modal-note" style="color:${t.grid ? '#22c55e' : '#94a3b8'}">${t.grid ? 'Yes - Use Grid' : 'No - Non-Grid'}</div>
+          <div class="modal-note" style="color:${t.grid ? '#22c55e' : 'var(--text-secondary)'}">${t.grid ? 'Yes - Use Grid' : 'No - Non-Grid'}</div>
         </div>
         ${t.notes ? `<div class="modal-section"><div class="modal-section-title">Notes</div><div class="modal-note">${t.notes}</div></div>` : ''}
         <div class="modal-actions">
@@ -1048,7 +1743,7 @@
             </div>
             <div class="form-group">
               <label>Region</label>
-              <input type="text" name="region" value="${t ? t.region : ''}" placeholder="Auto-detected" readonly style="color:#64748b;">
+              <input type="text" name="region" value="${t ? t.region : ''}" placeholder="Auto-detected" readonly style="color:var(--text-muted);">
             </div>
             <div class="form-group">
               <label>Projection/View <span>*</span></label>
@@ -1101,7 +1796,6 @@
           </div>
         </form>`;
       
-      // Auto-detect region when body part changes
       const bpSelect = editModal.querySelector('select[name="bodyPart"]');
       const regionInput = editModal.querySelector('input[name="region"]');
       bpSelect.addEventListener('change', () => {
@@ -1159,19 +1853,58 @@
       }
     }
 
-    // EVENT LISTENERS
-    searchBox.addEventListener('input', (e) => { searchQuery = e.target.value; clearSelection(); renderGrid(); });
-    regionFilters.addEventListener('click', (e) => { if (e.target.dataset.region) { currentRegion = e.target.dataset.region; clearSelection(); renderFilters(); renderGrid(); } });
-    sizeFilters.addEventListener('click', (e) => { if (e.target.dataset.size) { currentSize = e.target.dataset.size; renderFilters(); renderGrid(); } });
-    modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
-    editModalOverlay.addEventListener('click', (e) => { if (e.target === editModalOverlay) closeEditModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal(); closeEditModal(); } });
+    // ABOUT MODAL
+    const aboutModalOverlay = document.getElementById('aboutModalOverlay');
+    
+    function openAboutModal() {
+      const aboutModal = document.getElementById('aboutModal');
+      const statusClass = licenseData?.status === 'active' ? '' : 'trial';
+      const statusText = licenseData?.status === 'active' ? 'Active Subscription' : 'Trial';
+      
+      aboutModal.innerHTML = `
+        <button class="modal-close" onclick="closeAboutModal()" style="position:absolute;top:16px;right:16px;">✕</button>
+        <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/maven.png" alt="RadAtlas" class="about-logo">
+        <div class="about-title">RadAtlas</div>
+        <div class="about-version">Version 1.0.0</div>
+        <div class="about-description">
+          Professional X-Ray technique reference application featuring interactive anatomy selection, 
+          customizable protocols, and patient size adjustments.
+        </div>
+        <div class="about-license">
+          <div class="about-license-label">License Status</div>
+          <div class="about-license-status ${statusClass}">${statusText}</div>
+          ${licenseData?.customerEmail ? `<div style="margin-top:4px;color:var(--text-muted);">${licenseData.customerEmail}</div>` : ''}
+        </div>
+        <div class="about-divider"></div>
+        <img src="https://raw.githubusercontent.com/SysAdminDoc/RadAtlas/refs/heads/main/images/MavenLogo.png" alt="Maven Imaging" class="about-company-logo">
+        <div class="about-company-name">Maven Imaging, LLC</div>
+        <a href="https://www.mavenimaging.com" target="_blank" class="about-website">www.mavenimaging.com</a>
+        <div class="about-copyright">© 2026 Maven Imaging, LLC. All rights reserved.</div>
+        <button class="about-logout" onclick="logout()">Sign Out</button>
+      `;
+      aboutModalOverlay.classList.add('open');
+    }
+    
+    function closeAboutModal() { aboutModalOverlay.classList.remove('open'); }
 
-    // INITIALIZE
-    loadData();
-    initAnatomy();
-    renderFilters();
-    renderGrid();
+    function setupEventListeners() {
+      searchBox.addEventListener('input', (e) => { searchQuery = e.target.value; clearSelection(); renderGrid(); });
+      regionFilters.addEventListener('click', (e) => { if (e.target.dataset.region) { currentRegion = e.target.dataset.region; clearSelection(); renderFilters(); renderGrid(); } });
+      sizeFilters.addEventListener('click', (e) => { if (e.target.dataset.size) { currentSize = e.target.dataset.size; renderFilters(); renderGrid(); } });
+      modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+      editModalOverlay.addEventListener('click', (e) => { if (e.target === editModalOverlay) closeEditModal(); });
+      aboutModalOverlay.addEventListener('click', (e) => { if (e.target === aboutModalOverlay) closeAboutModal(); });
+      document.addEventListener('keydown', (e) => { 
+        if (e.key === 'Escape') { 
+          closeModal(); 
+          closeEditModal(); 
+          closeAboutModal();
+        } 
+      });
+    }
+
+    // START
+    checkLicense();
   </script>
 </body>
 </html>
